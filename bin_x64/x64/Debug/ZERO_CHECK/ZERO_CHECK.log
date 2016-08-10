@@ -1,0 +1,13 @@
+﻿  Checking Build System
+  CMake does not need to re-run because C:/Development/Projects/AIR/bin_x64/CMakeFiles/generate.stamp is up-to-date.
+  CMake is re-running because C:/Development/Projects/AIR/bin_x64/src/CMakeFiles/generate.stamp is out-of-date.
+    the file 'C:/Development/Projects/AIR/src/CMakeLists.txt'
+    is newer than 'C:/Development/Projects/AIR/bin_x64/src/CMakeFiles/generate.stamp.depend'
+    result='-1'
+  -- Found SFML 2.3.2 in C:/Development/Libraries/x64/SFML-2.3.2/include
+  -- Boost version: 1.61.0
+  -- Found the following Boost libraries:
+  --   filesystem
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: C:/Development/Projects/AIR/bin_x64

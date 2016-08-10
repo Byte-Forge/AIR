@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
-#include "DataEntry.hpp"
+#include <memory>
+#include "NeuralNetwork.hpp"
 
 class TrainingDataSet
 {
 public:
-
-	std::vector<DataEntry*> trainingSet;
-	std::vector<DataEntry*> generalizationSet;
-	std::vector<DataEntry*> validationSet;
+	std::vector<std::shared_ptr<DataEntry>> trainingSet;
+	std::vector<std::shared_ptr<DataEntry>> generalizationSet;
+	std::vector<std::shared_ptr<DataEntry>> validationSet;
 
 	TrainingDataSet() {}
 

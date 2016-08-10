@@ -1,0 +1,154 @@
+﻿  main.cpp
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  DataReader.cpp
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+C:\Development\Projects\AIR\src\DataReader.cpp(58): error C2664: 'void std::vector<int,std::allocator<_Ty>>::push_back(const int &)': cannot convert argument 1 from 'std::shared_ptr<air::DataEntry>' to 'int &&'
+          with
+          [
+              _Ty=int
+          ]
+  C:\Development\Projects\AIR\src\DataReader.cpp(58): note: Reason: cannot convert from 'std::shared_ptr<air::DataEntry>' to 'int'
+  C:\Development\Projects\AIR\src\DataReader.cpp(58): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Development\Projects\AIR\src\DataReader.cpp(61): error C2664: 'void std::vector<int,std::allocator<_Ty>>::push_back(const int &)': cannot convert argument 1 from 'std::shared_ptr<air::DataEntry>' to 'int &&'
+          with
+          [
+              _Ty=int
+          ]
+  C:\Development\Projects\AIR\src\DataReader.cpp(61): note: Reason: cannot convert from 'std::shared_ptr<air::DataEntry>' to 'int'
+  C:\Development\Projects\AIR\src\DataReader.cpp(61): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Development\Projects\AIR\src\DataReader.cpp(90): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+C:\Development\Projects\AIR\src\DataReader.cpp(94): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+C:\Development\Projects\AIR\src\DataReader.cpp(102): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+C:\Development\Projects\AIR\src\DataReader.cpp(207): error C2664: 'void std::vector<int,std::allocator<_Ty>>::push_back(const int &)': cannot convert argument 1 from 'std::shared_ptr<air::DataEntry>' to 'int &&'
+          with
+          [
+              _Ty=int
+          ]
+  C:\Development\Projects\AIR\src\DataReader.cpp(207): note: Reason: cannot convert from 'std::shared_ptr<air::DataEntry>' to 'int'
+  C:\Development\Projects\AIR\src\DataReader.cpp(207): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Development\Projects\AIR\src\DataReader.cpp(223): error C2664: 'void std::vector<int,std::allocator<_Ty>>::push_back(const int &)': cannot convert argument 1 from 'std::shared_ptr<air::DataEntry>' to 'int &&'
+          with
+          [
+              _Ty=int
+          ]
+  C:\Development\Projects\AIR\src\DataReader.cpp(223): note: Reason: cannot convert from 'std::shared_ptr<air::DataEntry>' to 'int'
+  C:\Development\Projects\AIR\src\DataReader.cpp(223): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Development\Projects\AIR\src\DataReader.cpp(239): error C2664: 'void std::vector<int,std::allocator<_Ty>>::push_back(const int &)': cannot convert argument 1 from 'std::shared_ptr<air::DataEntry>' to 'int &&'
+          with
+          [
+              _Ty=int
+          ]
+  C:\Development\Projects\AIR\src\DataReader.cpp(239): note: Reason: cannot convert from 'std::shared_ptr<air::DataEntry>' to 'int'
+  C:\Development\Projects\AIR\src\DataReader.cpp(239): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  NeuralNetwork.cpp
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+C:\Development\Projects\AIR\src\NeuralNetwork.cpp(53): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+C:\Development\Projects\AIR\src\NeuralNetwork.cpp(57): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+C:\Development\Projects\AIR\src\NeuralNetwork.cpp(64): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(453): note: see declaration of 'strtok'
+  NeuralNetworkTrainer.cpp
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(9): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(10): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2065: 'DataEntry': undeclared identifier
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C2923: 'std::shared_ptr': 'DataEntry' is not a valid template type argument for parameter '_Ty'
+c:\development\projects\air\src\TrainingDataSet.hpp(11): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+C:\Development\Projects\AIR\src\NeuralNetworkTrainer.cpp(116): error C2664: 'void air::NeuralNetworkTrainer::runTrainingEpoch(std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>>)': cannot convert argument 1 from 'std::vector<int,std::allocator<_Ty>>' to 'std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+          and
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+  C:\Development\Projects\AIR\src\NeuralNetworkTrainer.cpp(116): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Development\Projects\AIR\src\NeuralNetworkTrainer.cpp(119): error C2664: 'double air::NeuralNetwork::getSetAccuracy(std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &)': cannot convert argument 1 from 'std::vector<int,std::allocator<_Ty>>' to 'std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+          and
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+C:\Development\Projects\AIR\src\NeuralNetworkTrainer.cpp(120): error C2664: 'double air::NeuralNetwork::getSetMSE(std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &)': cannot convert argument 1 from 'std::vector<int,std::allocator<_Ty>>' to 'std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+          and
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+C:\Development\Projects\AIR\src\NeuralNetworkTrainer.cpp(143): error C2664: 'double air::NeuralNetwork::getSetAccuracy(std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &)': cannot convert argument 1 from 'std::vector<int,std::allocator<_Ty>>' to 'std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+          and
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+C:\Development\Projects\AIR\src\NeuralNetworkTrainer.cpp(144): error C2664: 'double air::NeuralNetwork::getSetMSE(std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &)': cannot convert argument 1 from 'std::vector<int,std::allocator<_Ty>>' to 'std::vector<std::shared_ptr<air::DataEntry>,std::allocator<_Ty>> &'
+          with
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+          and
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty=std::shared_ptr<air::DataEntry>
+          ]
+  Generating Code...

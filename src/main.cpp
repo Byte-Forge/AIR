@@ -2,10 +2,13 @@
 #include "NeuralNetwork.hpp"
 #include "NeuralNetworkTrainer.hpp"
 #include "DataReader.hpp"
+#include <memory>
 
 
 // Idee: speichere für jeden zug die aktuelle situation und die ausgeführte aktion
 // -> wenn der spieler gewinnt ist das datenset gültig und wird an die datenbank angehängt falls nicht lösche die daten
+
+using namespace air;
 
 int main()
 {
@@ -16,14 +19,14 @@ int main()
 
 	//create data set reader and load data file
 	DataReader d;
-	d.loadDataFile("data.csv", 16, 3);
+	d.loadDataFile("../../src/data.csv", 16, 3);
 	d.setCreationApproach(STATIC, 10);
 
 	//create neural network
-	NeuralNetwork nn(16, 20, 3);
+	std::shared_ptr<NeuralNetwork> nn = std::make_shared<NeuralNetwork>(16, 20, 2, 3);
 
 	//create neural network trainer
-	NeuralNetworkTrainer nT(&nn);
+	NeuralNetworkTrainer nT(nn);
 	nT.setTrainingParameters(0.001, 0.9, true);
 	nT.setStoppingConditions(20, 110);
 	nT.enableLogging("log.csv", 5);
@@ -35,7 +38,7 @@ int main()
 	}
 
 	//save the weights
-	nn.saveWeights("weights.csv");
+	nn->saveWeights("weights.csv");
 
     // run the program as long as the window is open
     while (window.isOpen())

@@ -9,7 +9,6 @@ find_package(Boost 1.61 COMPONENTS filesystem REQUIRED)
 
 #Create Target
 add_executable(${TARGET_NAME} main.cpp
-							DataEntry.hpp
 							DataReader.hpp
 							DataReader.cpp
 							NeuralNetwork.cpp

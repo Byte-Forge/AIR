@@ -4,39 +4,38 @@
 #include <string>
 #include <math.h>
 #include <algorithm>
+#include "NeuralNetwork.hpp"
 
-using namespace std;
+using namespace air;
 
 /*******************************************************************
 * Destructor
 ********************************************************************/
 DataReader::~DataReader()
 {
-	//clear data
-	for (int i=0; i < (int) data.size(); i++ ) delete data[i];		
-	data.clear();		 
+
 }
+
 /*******************************************************************
 * Loads a csv file of input data
 ********************************************************************/
 bool DataReader::loadDataFile( const char* filename, int nI, int nT )
 {
-	//clear any previous data
-	for (int i=0; i < (int) data.size(); i++ ) delete data[i];		
+	//clear any previous data		
 	data.clear();
-	tSet.clear();
+	tSet->clear();
 	
 	//set number of inputs and outputs
 	nInputs = nI;
 	nTargets = nT;
 
 	//open file for reading
-	fstream inputFile;
-	inputFile.open(filename, ios::in);	
+	std::fstream inputFile;
+	inputFile.open(filename, std::ios::in);
 
 	if ( inputFile.is_open() )
 	{
-		string line = "";
+		std::string line = "";
 		
 		//read data
 		while ( !inputFile.eof() )
@@ -56,13 +55,13 @@ bool DataReader::loadDataFile( const char* filename, int nI, int nT )
 		int vSize = (int) ( data.size() - trainingDataEndIndex - gSize );
 							
 		//generalization set
-		for ( int i = trainingDataEndIndex; i < trainingDataEndIndex + gSize; i++ ) tSet.generalizationSet.push_back( data[i] );
+		for ( int i = trainingDataEndIndex; i < trainingDataEndIndex + gSize; i++ ) tSet->generalizationSet.push_back( data[i] );
 				
 		//validation set
-		for ( int i = trainingDataEndIndex + gSize; i < (int) data.size(); i++ ) tSet.validationSet.push_back( data[i] );
+		for ( int i = trainingDataEndIndex + gSize; i < (int) data.size(); i++ ) tSet->validationSet.push_back( data[i] );
 		
 		//print success
-		cout << "Input File: " << filename << "\nRead Complete: " << data.size() << " Patterns Loaded"  << endl;
+		std::cout << "Input File: " << filename << "\nRead Complete: " << data.size() << " Patterns Loaded"  << std::endl;
 
 		//close file
 		inputFile.close();
@@ -71,7 +70,7 @@ bool DataReader::loadDataFile( const char* filename, int nI, int nT )
 	}
 	else 
 	{
-		cout << "Error Opening Input File: " << filename << endl;
+		std::cout << "Error Opening Input File: " << filename << std::endl;
 		return false;
 	}
 }
@@ -79,7 +78,7 @@ bool DataReader::loadDataFile( const char* filename, int nI, int nT )
 /*******************************************************************
 * Processes a single line from the data file
 ********************************************************************/
-void DataReader::processLine( string &line )
+void DataReader::processLine(std::string &line )
 {
 	//create new pattern and target
 	double* pattern = new double[nInputs];
@@ -119,7 +118,7 @@ void DataReader::processLine( string &line )
 
 
 	//add to records
-	data.push_back( new DataEntry( pattern, target ) );		
+	data.push_back(std::make_shared<DataEntry>(pattern, target));		
 }
 /*******************************************************************
 * Selects the data set creation approach
@@ -181,7 +180,7 @@ int DataReader::getNumTrainingSets()
 /*******************************************************************
 * Get data set created by creation approach
 ********************************************************************/
-TrainingDataSet* DataReader::getTrainingDataSet()
+std::shared_ptr<TrainingDataSet> DataReader::getTrainingDataSet()
 {		
 	switch ( creationApproach )
 	{	
@@ -189,13 +188,12 @@ TrainingDataSet* DataReader::getTrainingDataSet()
 		case GROWING : createGrowingDataSet(); break;
 		case WINDOWING : createWindowingDataSet(); break;
 	}
-	
-	return &tSet;
+	return tSet;
 }
 /*******************************************************************
 * Get all data entries loaded
 ********************************************************************/
-vector<DataEntry*>& DataReader::getAllDataEntries()
+std::vector<std::shared_ptr<DataEntry>>& DataReader::getAllDataEntries()
 {
 	return data;
 }
@@ -206,7 +204,7 @@ vector<DataEntry*>& DataReader::getAllDataEntries()
 void DataReader::createStaticDataSet()
 {
 	//training set
-	for ( int i = 0; i < trainingDataEndIndex; i++ ) tSet.trainingSet.push_back( data[i] );		
+	for ( int i = 0; i < trainingDataEndIndex; i++ ) tSet->trainingSet.push_back( data[i] );		
 }
 /*******************************************************************
 * Create a growing data set (contains only a percentage of entries
@@ -219,10 +217,10 @@ void DataReader::createGrowingDataSet()
 	if ( growingLastDataIndex > (int) trainingDataEndIndex ) growingLastDataIndex = trainingDataEndIndex;
 
 	//clear sets
-	tSet.trainingSet.clear();
+	tSet->trainingSet.clear();
 	
 	//training set
-	for ( int i = 0; i < growingLastDataIndex; i++ ) tSet.trainingSet.push_back( data[i] );			
+	for ( int i = 0; i < growingLastDataIndex; i++ ) tSet->trainingSet.push_back( data[i] );			
 }
 /*******************************************************************
 * Create a windowed data set ( creates a window over a part of the data
@@ -235,10 +233,10 @@ void DataReader::createWindowingDataSet()
 	if ( endIndex > trainingDataEndIndex ) endIndex = trainingDataEndIndex;		
 
 	//clear sets
-	tSet.trainingSet.clear();
+	tSet->trainingSet.clear();
 					
 	//training set
-	for ( int i = windowingStartIndex; i < endIndex; i++ ) tSet.trainingSet.push_back( data[i] );
+	for ( int i = windowingStartIndex; i < endIndex; i++ ) tSet->trainingSet.push_back( data[i] );
 			
 	//increase start index
 	windowingStartIndex += windowingStepSize;

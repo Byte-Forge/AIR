@@ -1,36 +1,48 @@
 #pragma once
 #include "DataReader.hpp"
-#include "DataEntry.hpp"
+#include <string>
+#include <memory>
 
-class NeuralNetwork
+namespace air
 {
-public:
-	//constructor & destructor
-	NeuralNetwork(int numInput, int numHidden, int numOutput);
-	~NeuralNetwork();
+	struct DataEntry
+	{
+		std::vector<double> pattern;	//all the patterns
+		std::vector<double> target;		//all the targets
+	};
 
-	bool loadWeights(char* inputFilename);
-	bool saveWeights(char* outputFilename);
-	int* feedForwardPattern(double* pattern);
-	double getSetAccuracy(std::vector<DataEntry*>& set);
-	double getSetMSE(std::vector<DataEntry*>& set);
-	int clampOutput(double x);
-	void feedForward(double* pattern);
+	class NeuralNetwork
+	{
+	public:
+		//constructor & destructor
+		NeuralNetwork(int numInput, int numHidden, int layers, int numOutput);
+		~NeuralNetwork();
 
-private:
-	void initializeWeights();
-	inline double activationFunction(double x);
+		bool loadWeights(const std::string& inputFilename);
+		bool saveWeights(const std::string& outputFilename);
+		std::vector<int> feedForwardPattern(std::vector<double> pattern);
+		double getSetAccuracy(std::vector<std::shared_ptr<DataEntry>>& set);
+		double getSetMSE(std::vector<std::shared_ptr<DataEntry>>& set);
+		int clampOutput(double x);
+		void feedForward(std::vector<double> pattern);
 
-public:
-	//number of neurons
-	int nInput, nHidden, nOutput;
+	private:
+		void initializeWeights();
+		inline double activationFunction(double x);
 
-	//neurons
-	double* inputNeurons;
-	double* hiddenNeurons;
-	double* outputNeurons;
+	public:
+		//number of neurons
+		int nInput, nHidden, nOutput;
+		int m_layers; //number of hidden neuron layers
 
-	//weights
-	double** wInputHidden;
-	double** wHiddenOutput;
-};
+					  //neurons
+		std::vector<double> inputNeurons;
+		std::vector<double> hiddenNeurons;
+		std::vector<double> outputNeurons;
+
+		//weights
+		std::vector<std::vector<double>> wInputHidden;
+		std::vector<std::vector<double>> wHiddenOutput;
+	};
+
+}
