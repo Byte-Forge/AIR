@@ -1,3 +1,0 @@
-C:/Development/Projects/AIR/bin_x64/CMakeFiles/ALL_BUILD.dir
-C:/Development/Projects/AIR/bin_x64/CMakeFiles/ZERO_CHECK.dir
-C:/Development/Projects/AIR/bin_x64/src/CMakeFiles/air.dir

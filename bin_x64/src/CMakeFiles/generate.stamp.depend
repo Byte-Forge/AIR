@@ -1,4 +1,0 @@
-# CMake generation dependency list for this directory.
-C:/Development/Projects/AIR/src/CMakeLists.txt
-C:/Development/Projects/AIR/cmake/Modules/FindSFML.cmake
-C:/Program Files (x86)/CMake/share/cmake-3.3/Modules/FindBoost.cmake
