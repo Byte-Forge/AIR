@@ -1,8 +1,41 @@
 #include <SFML/Window.hpp>
+#include "NeuralNetwork.hpp"
+#include "NeuralNetworkTrainer.hpp"
+#include "DataReader.hpp"
+
+
+// Idee: speichere für jeden zug die aktuelle situation und die ausgeführte aktion
+// -> wenn der spieler gewinnt ist das datenset gültig und wird an die datenbank angehängt falls nicht lösche die daten
 
 int main()
 {
     sf::Window window(sf::VideoMode(800, 600), "AI Research");
+
+	//seed random number generator
+	srand((unsigned int)time(0));
+
+	//create data set reader and load data file
+	DataReader d;
+	d.loadDataFile("data.csv", 16, 3);
+	d.setCreationApproach(STATIC, 10);
+
+	//create neural network
+	NeuralNetwork nn(16, 20, 3);
+
+	//create neural network trainer
+	NeuralNetworkTrainer nT(&nn);
+	nT.setTrainingParameters(0.001, 0.9, true);
+	nT.setStoppingConditions(20, 110);
+	nT.enableLogging("log.csv", 5);
+
+	//train neural network on data sets
+	for (int i = 0; i < d.getNumTrainingSets(); i++)
+	{
+		nT.trainNetwork(d.getTrainingDataSet());
+	}
+
+	//save the weights
+	nn.saveWeights("weights.csv");
 
     // run the program as long as the window is open
     while (window.isOpen())
