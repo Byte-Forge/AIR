@@ -33,7 +33,7 @@ namespace air
 		//--------------------------------------------------------------------------------------------
 	private:
 		inline double getOutputErrorGradient(double desiredValue, double outputValue);
-		double getHiddenErrorGradient(int j);
+		double getHiddenErrorGradient(int layer, int j);
 		void runTrainingEpoch(std::vector<std::shared_ptr<DataEntry>> trainingSet);
 		void backpropagate(std::vector<double> desiredOutputs);
 		void updateWeights();
@@ -53,12 +53,13 @@ namespace air
 		double desiredAccuracy;
 
 		//change to weights
-		std::vector<std::vector<double>> deltaInputHidden;
-		std::vector<std::vector<double>> deltaHiddenOutput;
+		//also for the layers
+		std::vector<std::vector<std::vector<double>>> deltaInputHidden;
+		std::vector<std::vector<std::vector<double>>> deltaHiddenOutput;
 
 		//error gradients
-		std::vector<double> hiddenErrorGradients;
-		std::vector<double> outputErrorGradients;
+		std::vector<std::vector<double>> hiddenErrorGradients;
+		std::vector<std::vector<double>> outputErrorGradients;
 
 		//accuracy stats per epoch
 		double trainingSetAccuracy;

@@ -32,12 +32,12 @@ namespace air
 
 					  //neurons
 		std::vector<double> inputNeurons;
-		std::vector<double> hiddenNeurons;
+		std::vector<std::vector<double>> hiddenNeurons;
 		std::vector<double> outputNeurons;
 
 		//weights
-		std::vector<std::vector<double>> wInputHidden;
-		std::vector<std::vector<double>> wHiddenOutput;
+		std::vector<std::vector<std::vector<double>>> wInputHidden;
+		std::vector<std::vector<std::vector<double>>> wHiddenOutput;
 	};
 
 }

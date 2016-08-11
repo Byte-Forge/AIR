@@ -15,7 +15,7 @@ int main()
     sf::Window window(sf::VideoMode(800, 600), "AI Research");
 
 	////seed random number generator
-	srand((unsigned int)time(0));
+	srand((unsigned int)time(0)); 
 
 	////create data set reader and load data file
 	DataReader d;
@@ -23,12 +23,12 @@ int main()
 	d.setCreationApproach(STATIC, 10);
 
 	////create neural network
-	std::shared_ptr<NeuralNetwork> nn = std::make_shared<NeuralNetwork>(16, 20, 2, 3);
+	std::shared_ptr<NeuralNetwork> nn = std::make_shared<NeuralNetwork>(16, 20, 3, 3);
 
 	//create neural network trainer
 	NeuralNetworkTrainer nT(nn);
-	nT.setTrainingParameters(0.001, 0.9, true);
-	nT.setStoppingConditions(20, 110);
+	nT.setTrainingParameters(0.001, 0.9, false);
+	nT.setStoppingConditions(200, 90);
 	nT.enableLogging("log.csv", 5);
 
 	//train neural network on data sets

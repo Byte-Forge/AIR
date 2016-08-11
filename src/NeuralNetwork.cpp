@@ -1,11 +1,9 @@
-//standard includes
+#include "NeuralNetwork.hpp"
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <math.h>
 #include <algorithm>
-
-#include "NeuralNetwork.hpp"
 
 using namespace air;
 
@@ -19,13 +17,15 @@ NeuralNetwork::NeuralNetwork(int nI, int nH, int layers, int nO) : nInput(nI), n
 	//create input bias neuron
 	inputNeurons[nInput] = -1;
 
-	hiddenNeurons = std::vector<double>(nHidden + 1, 0.0);
-	//create hidden bias neuron
-	hiddenNeurons[nHidden] = -1;
+	hiddenNeurons = std::vector<std::vector<double>>(m_layers, std::vector<double>(nHidden + 1, 0.0));
+	//create hidden bias neurons
+	for (int i = 0; i < m_layers; i++)
+		hiddenNeurons[i][nHidden] = -1;
 
 	outputNeurons = std::vector<double>(nOutput + 1, 0.0);
-	wInputHidden = std::vector<std::vector<double>>(nInput + 1, std::vector<double>(nHidden, 0.0));
-	wHiddenOutput = std::vector<std::vector<double>>(nHidden + 1, std::vector<double>(nOutput, 0.0));
+
+	wInputHidden = std::vector<std::vector<std::vector<double>>>(m_layers, std::vector<std::vector<double>>(nInput + 1, std::vector<double>(nHidden, 0.0)));
+	wHiddenOutput = std::vector<std::vector<std::vector<double>>>(m_layers, std::vector<std::vector<double>>(nHidden + 1, std::vector<double>(nOutput, 0.0)));
 
 	initializeWeights();
 }
@@ -88,19 +88,22 @@ bool NeuralNetwork::loadWeights(const std::string& filename)
 			//set weights
 			int pos = 0;
 
-			for (int i = 0; i <= nInput; i++)
+			for (int k = 0; k < m_layers; k++)
 			{
-				for (int j = 0; j < nHidden; j++)
+				for (int i = 0; i <= nInput; i++)
 				{
-					wInputHidden[i][j] = weights[pos++];
+					for (int j = 0; j < nHidden; j++)
+					{
+						wInputHidden[k][i][j] = weights[pos++];
+					}
 				}
-			}
 
-			for (int i = 0; i <= nHidden; i++)
-			{
-				for (int j = 0; j < nOutput; j++)
+				for (int i = 0; i <= nHidden; i++)
 				{
-					wHiddenOutput[i][j] = weights[pos++];
+					for (int j = 0; j < nOutput; j++)
+					{
+						wHiddenOutput[k][i][j] = weights[pos++];
+					}
 				}
 			}
 
@@ -131,20 +134,23 @@ bool NeuralNetwork::saveWeights(const std::string& filename)
 		outputFile.precision(50);
 
 		//output weights
-		for (int i = 0; i <= nInput; i++)
+		for (int k = 0; k < m_layers; k++)
 		{
-			for (int j = 0; j < nHidden; j++)
+			for (int i = 0; i <= nInput; i++)
 			{
-				outputFile << wInputHidden[i][j] << ",";
+				for (int j = 0; j < nHidden; j++)
+				{
+					outputFile << wInputHidden[k][i][j] << ",";
+				}
 			}
-		}
 
-		for (int i = 0; i <= nHidden; i++)
-		{
-			for (int j = 0; j < nOutput; j++)
+			for (int i = 0; i <= nHidden; i++)
 			{
-				outputFile << wHiddenOutput[i][j];
-				if (i * nOutput + j + 1 != (nHidden + 1) * nOutput) outputFile << ",";
+				for (int j = 0; j < nOutput; j++)
+				{
+					outputFile << wHiddenOutput[k][i][j];
+					if (i * nOutput + j + 1 != (nHidden + 1) * nOutput) outputFile << ",";
+				}
 			}
 		}
 
@@ -231,23 +237,26 @@ void NeuralNetwork::initializeWeights()
 
 	//set weights between input and hidden 		
 	//--------------------------------------------------------------------------------------------------------
-	for (int i = 0; i <= nInput; i++)
+	for (int k = 0; k < m_layers; k++)
 	{
-		for (int j = 0; j < nHidden; j++)
+		for (int i = 0; i <= nInput; i++)
 		{
-			//set weights to random values
-			wInputHidden[i][j] = (((double)(rand() % 100) + 1) / 100 * 2 * rH) - rH;
+			for (int j = 0; j < nHidden; j++)
+			{
+				//set weights to random values
+				wInputHidden[k][i][j] = (((double)(rand() % 100) + 1) / 100 * 2 * rH) - rH;
+			}
 		}
-	}
 
-	//set weights between input and hidden
-	//--------------------------------------------------------------------------------------------------------
-	for (int i = 0; i <= nHidden; i++)
-	{
-		for (int j = 0; j < nOutput; j++)
+		//set weights between input and hidden
+		//--------------------------------------------------------------------------------------------------------
+		for (int i = 0; i <= nHidden; i++)
 		{
-			//set weights to random values
-			wHiddenOutput[i][j] = (((double)(rand() % 100) + 1) / 100 * 2 * rO) - rO;
+			for (int j = 0; j < nOutput; j++)
+			{
+				//set weights to random values
+				wHiddenOutput[k][i][j] = (((double)(rand() % 100) + 1) / 100 * 2 * rO) - rO;
+			}
 		}
 	}
 
@@ -272,30 +281,33 @@ void NeuralNetwork::feedForward(std::vector<double> pattern)
 
 	//Calculate Hidden Layer values - include bias neuron
 	//--------------------------------------------------------------------------------------------------------
-	for (int j = 0; j < nHidden; j++)
+	for (int l = 0; l < m_layers; l++)
 	{
-		//clear value
-		hiddenNeurons[j] = 0;
+		for (int j = 0; j < nHidden; j++)
+		{
+			//clear value
+			hiddenNeurons[l][j] = 0;
 
-		//get weighted sum of pattern and bias neuron
-		for (int i = 0; i <= nInput; i++) hiddenNeurons[j] += inputNeurons[i] * wInputHidden[i][j];
+			//get weighted sum of pattern and bias neuron
+			for (int i = 0; i <= nInput; i++) hiddenNeurons[l][j] += inputNeurons[i] * wInputHidden[l][i][j];
 
-		//set to result of sigmoid
-		hiddenNeurons[j] = activationFunction(hiddenNeurons[j]);
-	}
+			//set to result of sigmoid
+			hiddenNeurons[l][j] = activationFunction(hiddenNeurons[l][j]);
+		}
 
-	//Calculating Output Layer values - include bias neuron
-	//--------------------------------------------------------------------------------------------------------
-	for (int k = 0; k < nOutput; k++)
-	{
-		//clear value
-		outputNeurons[k] = 0;
+		//Calculating Output Layer values - include bias neuron
+		//--------------------------------------------------------------------------------------------------------
+		for (int k = 0; k < nOutput; k++)
+		{
+			//clear value
+			outputNeurons[k] = 0;
 
-		//get weighted sum of pattern and bias neuron
-		for (int j = 0; j <= nHidden; j++) outputNeurons[k] += hiddenNeurons[j] * wHiddenOutput[j][k];
+			//get weighted sum of pattern and bias neuron
+			for (int j = 0; j <= nHidden; j++) outputNeurons[k] += hiddenNeurons[l][j] * wHiddenOutput[l][j][k];
 
-		//set to result of sigmoid
-		outputNeurons[k] = activationFunction(outputNeurons[k]);
+			//set to result of sigmoid
+			outputNeurons[k] = activationFunction(outputNeurons[k]);
+		}
 	}
 }
 
