@@ -1,16 +1,11 @@
 #pragma once
 #include "DataReader.hpp"
+#include <vector>
 #include <string>
 #include <memory>
 
 namespace air
 {
-	struct DataEntry
-	{
-		std::vector<double> pattern;	//all the patterns
-		std::vector<double> target;		//all the targets
-	};
-
 	class NeuralNetwork
 	{
 	public:

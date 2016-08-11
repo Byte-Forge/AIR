@@ -8,6 +8,11 @@
 
 using namespace air;
 
+DataReader::DataReader() : creationApproach(NONE), numTrainingSets(-1) 
+{
+	tSet = std::make_shared<TrainingDataSet>();
+}
+
 /*******************************************************************
 * Destructor
 ********************************************************************/
@@ -19,11 +24,12 @@ DataReader::~DataReader()
 /*******************************************************************
 * Loads a csv file of input data
 ********************************************************************/
-bool DataReader::loadDataFile( const char* filename, int nI, int nT )
+bool DataReader::loadDataFile( const std::string& filename, int nI, int nT )
 {
 	//clear any previous data		
 	data.clear();
-	tSet->clear();
+	if (tSet != nullptr)
+		tSet->clear();
 	
 	//set number of inputs and outputs
 	nInputs = nI;
@@ -81,8 +87,8 @@ bool DataReader::loadDataFile( const char* filename, int nI, int nT )
 void DataReader::processLine(std::string &line )
 {
 	//create new pattern and target
-	double* pattern = new double[nInputs];
-	double* target = new double[nTargets];
+	std::vector<double> pattern = std::vector<double>(nInputs);
+	std::vector<double> target = std::vector<double>(nTargets);
 	
 	//store inputs		
 	char* cstr = new char[line.size()+1];

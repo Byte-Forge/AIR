@@ -14,15 +14,15 @@ int main()
 {
     sf::Window window(sf::VideoMode(800, 600), "AI Research");
 
-	//seed random number generator
+	////seed random number generator
 	srand((unsigned int)time(0));
 
-	//create data set reader and load data file
+	////create data set reader and load data file
 	DataReader d;
 	d.loadDataFile("../../src/data.csv", 16, 3);
 	d.setCreationApproach(STATIC, 10);
 
-	//create neural network
+	////create neural network
 	std::shared_ptr<NeuralNetwork> nn = std::make_shared<NeuralNetwork>(16, 20, 2, 3);
 
 	//create neural network trainer

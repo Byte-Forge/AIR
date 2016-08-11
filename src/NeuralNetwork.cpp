@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <math.h>
+#include <algorithm>
 
 #include "NeuralNetwork.hpp"
 
@@ -11,8 +12,10 @@ using namespace air;
 NeuralNetwork::NeuralNetwork(int nI, int nH, int layers, int nO) : nInput(nI), nHidden(nH), m_layers(layers), nOutput(nO)
 {
 	//TODO: create layers of hidden neurons
-
 	inputNeurons = std::vector<double>(nInput + 1, 0.0);
+	/*inputNeurons.resize(nInput + 1);
+	std::fill(inputNeurons.begin(), inputNeurons.end(), 0.0);*/
+
 	//create input bias neuron
 	inputNeurons[nInput] = -1;
 

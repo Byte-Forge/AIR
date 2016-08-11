@@ -2,23 +2,21 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "DataEntry.hpp"
 #include "TrainingDataSet.hpp"
 
 namespace air
 {
-	class NeuralNetwork;
-	struct DataEntry;
-
 	//dataset retrieval approach enum
 	enum { NONE, STATIC, GROWING, WINDOWING };
 
 	class DataReader
 	{
 	public:
-		DataReader() : creationApproach(NONE), numTrainingSets(-1) {}
+		DataReader();
 		~DataReader();
 
-		bool loadDataFile(const char* filename, int nI, int nT);
+		bool loadDataFile(const std::string& filename, int nI, int nT);
 		void setCreationApproach(int approach, double param1 = -1, double param2 = -1);
 		int getNumTrainingSets();
 

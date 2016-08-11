@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "DataEntry.hpp"
 #include "NeuralNetwork.hpp"
 
 //Constant Defaults!
